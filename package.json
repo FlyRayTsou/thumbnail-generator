@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/FlyRayTsou/thumbnail-generator.git",
   "author": "Ray <rayflyworld@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  }
 }
