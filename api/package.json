@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "a JSON-based REST API service which resizes images into 100x100px thumbnails",
   "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ignore-path .gitignore --fix --ext .js,.jsx,.ts,.tsx"
+  },
   "repository": "https://github.com/FlyRayTsou/thumbnail-generator.git",
   "author": "Ray <rayflyworld@gmail.com>",
   "license": "MIT",
