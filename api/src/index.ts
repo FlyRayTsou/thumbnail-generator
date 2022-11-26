@@ -3,7 +3,7 @@ import { MainController } from './controller/MainController'
 
 console.log('Connection was created.')
 const app = express.default()
-app.use(express.json())
+app.use(express.json({limit: '25mb'}));
 app.use(
     (req: express.Request, res: express.Response, next: express.NextFunction) => {
         res.setHeader('Access-Control-Allow-Origin', '*')
@@ -16,5 +16,6 @@ app.use(
         next()
     }
 )
-app.get('/test', MainController.index)
+app.get('/healthCheck', MainController.index)
+app.post('/createThumbnail', MainController.createThumbnail)
 app.listen(3456)
