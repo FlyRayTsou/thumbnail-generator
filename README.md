@@ -6,6 +6,8 @@ A JSON-based REST API service which resizes images into 100x100px thumbnails
 
 ## API List
 
+URL: http://localhost:1234/
+
 ### GET : /healthCheck
 
 Check whether server is survice
