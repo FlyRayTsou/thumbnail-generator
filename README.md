@@ -12,19 +12,30 @@ Check whether server is survice
 
 ### POST : /createThumbnail
 
-Sample Request Body
+Content-Type: application/json
 
+Sample Request Body
 ```
 {"image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4QDERXhpZgAATU0AKgAAAAgAAgEyAAIAAAAUAAAAJodpAAQAAAABAAAAOgAAAAAyMDE4OjAxOjI2IDExOjE2OjA1AAAHkAMAAgAAABQAAACUkAQAAgAAABQAAACokpEAAgAAAAQ3MzIAkpIAAgAAAAQ3MzIAoAEAAwAAAAEAAQAAoAIABAAAAAEAAAQAoAMABAAAAAEAAAMAAAAAADIwMTg6MDE6MjYgMTE6MTY6MDUAMjAxODowMToyNiAxMToxNjowNQD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIAAUABQMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APw5+N//AAUR/Zh1y78LW1h/wTQ/Z50mbR9A0rT7y7k/4QDUJtYltPDXhnTW1C5YfA2xkW7vLjTbrU7ySWW6ae71Odi4dZJbjysKnKEny01dw2eKtdUqcW/97duaUXOyslzWs2nJ1WhaSSnUS95q/I7Jzk1H+HtFaJ9T/9k="}
 ```
 
-## Start
+## How to start
 
 ```
-% docker-compose up --build
+% docker-compose up
 ```
 
-## Image Resize Tool
+## How to test
+
+1. Convert your image intro Base64 string
+    - https://www.base64-image.de/
+1. Use API Tool (Ex: postman). Put Base64 string in Request body and call /createThumbnail API to get 100x100 thumbnail base64 image
+1. After calling /createThumbnail API, we will get the base64 string response. You can use some online tool to convert the base64 string into image and check the result.
+    - https://codebeautify.org/base64-to-image-converter
+
+# Related Information
+
+## Compare image resize tool
 
 ### Jimp vs Sharp
 
@@ -33,7 +44,7 @@ Sharp have more starts and seems more stable than Jimp. However, I meet some pro
 - https://npmtrends.com/jimp-vs-sharp
 - https://stackoverflow.com/questions/46619628/base64-image-resizer-nodejs
 
-#### Jimp Sample Code
+### Jimp Sample Code
 
 - https://github.com/oliver-moran/jimp/tree/master/packages/plugin-resize
 - https://github.com/oliver-moran/jimp/issues/231
@@ -41,21 +52,7 @@ Sharp have more starts and seems more stable than Jimp. However, I meet some pro
 - https://stackoverflow.com/questions/52400486/error-cropping-a-base64-format-image-using-jimp-package-in-nodejs
 
 
-## Test
-
-### Convert Test Image Intro Base64 string
-
-- https://www.base64-image.de/
-
-### Call /createThumbnail API to get 100x100 thumbnail base64 image
-
-After calling /createThumbnail API, we will get the base64 string response. You can use some online tool to convert the base64 string into image and check the result
-
-- https://codebeautify.org/base64-to-image-converter
-
-## Others
-
-### How many ways which you send image in an API POST request
+## How many ways which you send image in an API POST request
 
 - https://nimesha-dilini.medium.com/send-image-files-in-an-api-post-request-aa1af1c4a7fb
 - https://stackoverflow.com/questions/16015548/how-to-send-multipart-form-data-request-using-postman/16022213#16022213
@@ -74,7 +71,7 @@ Use nvm to switch node version by project.
 
 ### PayloadTooLargeError: request entity too large
 
-If we tried to pass image by base64 string, we may meet this error. We can set size limit.
+If we tried to transfer big image by base64 string, we may meet this error. We can set size limit.
 
 - https://stackoverflow.com/questions/68686118/node-express-payloadtoolargeerror-request-entity-too-large
 
@@ -82,11 +79,9 @@ If we tried to pass image by base64 string, we may meet this error. We can set s
 
 - https://stackoverflow.com/questions/43465086/env-node-no-such-file-or-directory-in-mac
 
-## TODO & Investigation
-
 ### Sharp Error
 
-It seems like that thereare some problem about platform and arch.
+It seems like that there are some problem about platform and arch.
 
 Even I tried `yarn install --target_platform=linux --npm_config_arch=x64` but it didn't work.
 
